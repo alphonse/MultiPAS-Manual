@@ -1,0 +1,35 @@
+---
+title: "MultiPAS User's Guide"
+author: "Al Fischer"
+output:
+  bookdown::gitbook:
+    config:
+      download:
+      - pdf
+      - epub
+      - mobi
+      toc:
+        before: |
+          <li><a href="index.html">MultiPAS User's Guide</a></li>
+        after: |
+          <li><a href="https://bookdown.org">
+          Published in R with bookdown</a></li>
+  bookdown::epub_book: default
+  bookdown::pdf_book: default
+site: bookdown::bookdown_site
+documentclass: book
+---
+
+
+#  {-}
+<center>
+***MultiPAS-III/IV***
+
+*Multi-laser photoacoustic spectrometers*
+
+```{r echo=FALSE, out.width=500, fig.align='center'}
+knitr::include_graphics("./images/multiPAS.png")
+```
+
+&copy; 2016 Al Fischer/Smith Lab/University of Georgia
+</center>

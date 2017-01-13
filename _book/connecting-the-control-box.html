@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>MultiPAS User’s Guide</title>
+  <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+  <meta name="description" content="MultiPAS User’s Guide">
+  <meta name="generator" content="bookdown 0.3 and GitBook 2.6.7">
+
+  <meta property="og:title" content="MultiPAS User’s Guide" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="MultiPAS User’s Guide" />
+  
+  
+  
+
+<meta name="author" content="Al Fischer">
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="connecting-the-instrument.html">
+<link rel="next" href="connecting-the-microphone.html">
+
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body>
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> MultiPAS User’s Guide</a></li>
+<li class="chapter" data-level="2" data-path="safety-information.html"><a href="safety-information.html"><i class="fa fa-check"></i><b>2</b> Safety Information</a></li>
+<li class="chapter" data-level="3" data-path="connecting-the-instrument.html"><a href="connecting-the-instrument.html"><i class="fa fa-check"></i><b>3</b> Connecting the Instrument</a><ul>
+<li class="chapter" data-level="3.1" data-path="connecting-the-control-box.html"><a href="connecting-the-control-box.html"><i class="fa fa-check"></i><b>3.1</b> Connecting the Control Box</a></li>
+<li class="chapter" data-level="3.2" data-path="connecting-the-microphone.html"><a href="connecting-the-microphone.html"><i class="fa fa-check"></i><b>3.2</b> Connecting the Microphone</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="getting-started.html"><a href="getting-started.html"><i class="fa fa-check"></i><b>4</b> Getting Started</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">MultiPAS User’s Guide</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="connecting-the-control-box" class="section level2">
+<h2><span class="header-section-number">3.1</span> Connecting the Control Box</h2>
+<ol style="list-style-type: decimal">
+<li>Pass the electrical umbilical through the hole in the PAS case and connect the three SDR cables to the back of each laser; note the color code on the cables (blue = 423 nm, green = 532 nm, red = 781 nm).</li>
+<li><p>Connect the photodiode to the <strong>Photodiode</strong> connection on the control box with a coaxial cable via the BNC connections. Also connect the photodiode to the supplied +/-12 V power supply via the threaded, 3-pin connector.</p>
+<p><img src="images/warning_highVoltage.png" width="30" style="display: block; margin: auto;" /></p>
+<blockquote>
+<p><em>Ensure the appropriate mains voltage is selected on the photodiode power supply before plugging it in.</em></p>
+</blockquote></li>
+<li>Connect the microphone amplifier to the back of the control box with a standard 3.1 mm audio cable via the audio jacks.</li>
+<li>Connect the <strong>Sample In</strong> barb on the back of the control box to the sample source (e.g. ambient air or simulation chamber). This is the sampling point.</li>
+<li>Connect the <strong>Sample Out to PAS</strong> barb on the back of the control box to the <strong>Sample In</strong> barb on the PAS case.</li>
+<li><p>Connect the <strong>Sample Out to Pump</strong> barb on the PAS case to the <strong>Pump In</strong> connection on the control box.</p>
+<blockquote>
+<p><em>The preceeding three steps are only used when the PAS is operating in “pull mode”, that is, pulling sample into the instrument. For “push mode” (e.g. when sampling from a gas cylinder) and further information regarding flows, see the chapter on the PAS flow system.</em></p>
+</blockquote></li>
+<li>Connect the control box to a computer via the USB-B connection on the back of the control box. <em>Note: the USB connection powers the microprocessor inside the control box; the processor remains on as long as the USB cable is plugged in</em>.</li>
+<li><p>Plug the control box into the while with a three prong mains cord via the power entry module on the back of the box. The main circuitry remains off until the power switch at the cord is switched on.</p></li>
+</ol>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="connecting-the-instrument.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="connecting-the-microphone.html" class="navigation navigation-next " aria-label="Next page""><i class="fa fa-angle-right"></i></a>
+
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"weibo": false,
+"instapper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"download": ["_main.pdf", "_main.epub", "_main.mobi"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

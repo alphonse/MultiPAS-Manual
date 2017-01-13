@@ -1,0 +1,5 @@
+# Software
+
+      - **Save Sweeps:** Saves the automatic frequency sweeps upon completion; format Frequency, Hz (column 1) and Intensity, mV (column 2).
+      - **Save Raw:** Saves the microphone and photodiode raw data; format (for each, by column) Time (%Y-%m-%d %H:%M:%S), 423 nm data (mV), 532 nm data (mV), 785 nm data (mV).  It is suggested to always save raw data.
+      - **Save Absorption:** Saves the absorption values caluculated in real time; format (by column) Time (%Y-%m-%d %H:%M:%S), 423 nm data (1/Mm), 532 nm data (1/Mm), 785 nm data (1/Mm).  *Note: It is suggested to always save raw data, even when saving the calculated absorption*.

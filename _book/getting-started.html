@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>MultiPAS User’s Guide</title>
+  <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+  <meta name="description" content="MultiPAS User’s Guide">
+  <meta name="generator" content="bookdown 0.3 and GitBook 2.6.7">
+
+  <meta property="og:title" content="MultiPAS User’s Guide" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="MultiPAS User’s Guide" />
+  
+  
+  
+
+<meta name="author" content="Al Fischer">
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="connecting-the-instrument.html">
+
+
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body>
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="index.html">MultiPAS User's Guide</a></li>
+
+<li class="divider"></li>
+<li><a href="index.html#section"></a></li>
+<li class="chapter" data-level="1" data-path="safety-information.html"><a href="safety-information.html"><i class="fa fa-check"></i><b>1</b> Safety Information</a></li>
+<li class="chapter" data-level="2" data-path="connecting-the-instrument.html"><a href="connecting-the-instrument.html"><i class="fa fa-check"></i><b>2</b> Connecting the Instrument</a></li>
+<li class="chapter" data-level="3" data-path="getting-started.html"><a href="getting-started.html"><i class="fa fa-check"></i><b>3</b> Getting Started</a><ul>
+<li class="chapter" data-level="3.1" data-path="getting-started.html"><a href="getting-started.html#installation"><i class="fa fa-check"></i><b>3.1</b> Installation</a></li>
+<li class="chapter" data-level="3.2" data-path="getting-started.html"><a href="getting-started.html#powering-on"><i class="fa fa-check"></i><b>3.2</b> Powering On</a></li>
+<li class="chapter" data-level="3.3" data-path="getting-started.html"><a href="getting-started.html#using-the-software"><i class="fa fa-check"></i><b>3.3</b> Using the Software</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://bookdown.org">
+Published in R with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">MultiPAS User’s Guide</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="getting-started" class="section level1">
+<h1><span class="header-section-number">3</span> Getting Started</h1>
+<p>This section outlines the basic steps needed to start sampling with the PAS for the first time and after it has been turned off. It assumes the instrument has been connected according to <a href="connecting-the-instrument.html">Chapter 2</a>.</p>
+<div id="installation" class="section level2">
+<h2><span class="header-section-number">3.1</span> Installation</h2>
+<ol style="list-style-type: decimal">
+<li>Download and install the following third-party software:
+<ul>
+<li><a href="http://www.ni.com/download/labview-run-time-engine-2016/6067/en/">LabVIEW run time engine</a> 2011 or later (National Instruments)</li>
+<li><a href="https://www.zeitnitz.eu/scms/waveio">WaveIO</a> (Christian Zeitnitz)</li>
+<li>OBIS Connection (supplied on USB flash drive, Coherent, Inc.)</li>
+</ul></li>
+<li>Download the <a href="https://github.com/alphonse/MultiPAS-III/tree/master/exec">MultiPAS-III</a> (3 wavelengths) or <a href="https://github.com/alphonse/MultiPAS-IV/tree/master/exec">MultiPAS-IV</a> executable.</li>
+<li>Connect the USB cable to the computer and let Windows Update install the necessary drivers.</li>
+</ol>
+</div>
+<div id="powering-on" class="section level2">
+<h2><span class="header-section-number">3.2</span> Powering On</h2>
+<ol style="list-style-type: decimal">
+<li>Switch the main power on by moving the switch on the rear of the control box to the on position (“1”).</li>
+<li>Ensure the laser supplies have illuminated indicators. If necessary, turn their power switches to on.</li>
+<li>Open the laser apertures by sliding the knurled slider on top of the laser heads in the PAS case.</li>
+<li>Ensure the microphone is plugged in to DC power and it’s green LED is illuminated.</li>
+<li>Turn the photodiode power supply on via the switch on the power brick. Turn the photodiode on via the switch on the side of the sensor; the green light should illuminate.</li>
+<li>Remove the photodiode’s lens cap if necessary.</li>
+<li>Turn the pump on by switching on the “<strong>Pump</strong>” switch on the front of the control box to begin pulling sample through the instrument.</li>
+</ol>
+</div>
+<div id="using-the-software" class="section level2">
+<h2><span class="header-section-number">3.3</span> Using the Software</h2>
+<ol style="list-style-type: decimal">
+<li>Open the “<strong>MultiPAS-III.exe</strong>” control program, which should start automatically. <em>Note: If COM ports have been changed, or a new computer is used you may have to stop the program and select the appropriate COM ports in the first tab of the UI.</em></li>
+<li>Type your calibration coefficient into the appropriate box in the <em>Calibration</em> Tab to display quantitated absroption data.</li>
+<li>Turn the lasers on by pressing <em>All Emit</em>. Alternatively, individual lasers can be turned on and off with the buttons for each laser. You should see three peaks near 1370 Hz in the FFT plots under both the <em>Microphone</em> and <em>Photodide</em> tabs.</li>
+<li>To have the instrument operate autonomously, write the full filepath (including the name) into the file name boxes in the first time of the software.
+<ul>
+<li><strong>Save Sweeps:</strong> Saves the automatic frequency sweeps upon completion; format Frequency, Hz (column 1) and Intensity, mV (column 2).</li>
+<li><strong>Save Raw:</strong> Saves the microphone and photodiode raw data; format (for each, by column) Time (%Y-%m-%d %H:%M:%S), 423 nm data (mV), 532 nm data (mV), 785 nm data (mV). It is suggested to always save raw data.</li>
+<li><strong>Save Absorption:</strong> Saves the absorption values caluculated in real time; format (by column) Time (%Y-%m-%d %H:%M:%S), 423 nm data (1/Mm), 532 nm data (1/Mm), 785 nm data (1/Mm). <em>Note: It is suggested to always save raw data, even when saving the calculated absorption</em>.</li>
+</ul></li>
+<li>To automatically collect background spectra, select <strong>Auto Filter</strong> on the main panel of the UI. Under this setting the control box will automatically cycle between HEPA filtered air (background) and sample, and will perform frequency sweeps in between. You may set the sample time (time between filters) and background time (time for the filter and frequency sweep) to the desired time, but 24 minutes and 6 minutes are, respectively, the default and suggested values.</li>
+</ol>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="connecting-the-instrument.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"weibo": false,
+"instapper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"download": ["_main.pdf", "_main.epub", "_main.mobi"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

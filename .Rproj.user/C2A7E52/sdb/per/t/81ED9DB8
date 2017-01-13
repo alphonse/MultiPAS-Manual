@@ -1,0 +1,20 @@
+{
+    "collab_server" : "",
+    "contents" : "# Troubleshooting\n\n## Common Software Errors\n1. *VISA Read/Write: Device not found.*  Either the incorrect COM ports have been selected or the USB communication has frozen.  In the case of the latter, exit LabVIEW completely and reset the PAS by turning off the main power switch on the control box *and* disconnecting the USB cable.  Reconnect and restart.\n1. *VISA Read/Write: Device is valid but VISA cannot open it.*  Another program is communicating with one of the PAS's components.  Close other programs and restart LabVIEW.\n1. *Valve will not switch and/or frequencies will not change.*  USB communication broken -- exit LabVIEW completely and reset the PAS by turning off the main power switch on the control box *and* disconnecting the USB cable.  Reconnect and restart.\n1. *WaveIO Device Not Found.*  Known bug with unknown cause.  To fix, stop the program, increase the PD and mic device ID's (under the Utilities tab) by 1 and start the program.  Then, stop the program, set them back to their original values and start the program again.  The errors should go away after the final restart.\n1. *Extremely fast aquisition (x-axis) on PD or mic plots.*  See *WaveIO Device Not Found*, above.\n\n## Common Hardware Errors\n1. *No Signal or Excessive Noise.*  Excessive noise or a cancellation of signal may occur if:\n    - *There is an opening on the PAS cell.*  Make sure the inlet and outlet are attached to the control box, a gas line, or plugged; check all fittings on the PAS cell to ensure they are tight.\n    - *The pump is not set correctly or the orifice is missing.* Lower the pump speed with the trim pot on the pump and check that the orifice is in place.\n    - *The flow rate is too high.*  Lower the flow rate.\n1.  *High Background.*  The cell may be dirty.  See [Cleaning the PAS](maintainance.html#cleaning-the-pas).\n1.  *Low Laser Powers.*  Low laser power may be observed if:\n    - *The multipass alignment is bad.*  [Align](maintainance.html#realignment) the multipass cell.\n    - *The optics are dirty.* [Clean the optics.](maintainance.html#cleaning-the-optics)\n    - *The optics are misaligned* Go through the [realigment](maintainance.html#realignment) procedure.",
+    "created" : 1482326009936.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3381530293",
+    "id" : "81ED9DB8",
+    "lastKnownWriteTime" : 1484339772,
+    "last_content_update" : 1484339772587,
+    "path" : "~/Dropbox/MultiPAS/manual_MultiPAS/08_Troubleshooting.Rmd",
+    "project_path" : "08_Troubleshooting.Rmd",
+    "properties" : {
+    },
+    "relative_order" : 9,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_markdown"
+}
