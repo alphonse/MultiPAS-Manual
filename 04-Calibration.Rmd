@@ -1,0 +1,32 @@
+# Calibration
+
+The PAS should be calibrated periodically against a standard gas mixture or a cavity ringdown spectrometer to account for the sensitivity of the cell acoustic response and microphone.  By measuring a known abosrption of NO$_2$ and comparing the measured PAS signal to the known absorption, the cell constant can be determined.  A standard mixture of NO$_2$ may be obtained from a specialty gas supplier (such as [Airgas](https://www.airgas.com/)) or made quantitatively in a lab with appropriate capabilities.^[[A Sensitive and Versatile Detector for Atmospheric NO2 and NOX Based on Blue Diode Laser Cavity Ring-Down Spectroscopy](http://pubs.acs.org/doi/abs/10.1021/es902067h)
+Hendrik Fuchs, William P. Dubé, Brian M. Lerner, Nicholas L. Wagner, Eric J. Williams, and Steven S. Brown
+Environmental Science & Technology 2009 43 (20), 7831-7836
+DOI: 10.1021/es902067h]  A stock concentration of 1-10 ppm is suggested.  The flow rate uncertainties dominate the total error on the PAS measurements; thus, care should be taken to select appropriate flow control devices such as to minimize uncertainties on the flow rates.  The recommended calibrant is NO$_2$.
+
+## Setup
+1.  Connect the regulator to the standard NO2 cylinder and connect to the flow control and measurement device(s) compatible with NO$_2$ (e.g. a mass flow controller or rotameter).  Flows will be in the 5-100 SCCM; select a flow controller accordingly.
+1.  Connect the outlet flow to one side of a standard $\frac{1}{4}$" T-connector with PTFE tubing.
+1.  Connect an N$_2$ source (e.g. a liquid nitrogen dewar, 22 psi/50 liter) to a CGA 580 regulator and then to a flow control and measurement device.  Flow will be 100-300 SCCM; select device accordingly.
+1.  Connect the N$_2$ line to the other side of the T-connector.
+1.  Connect the third port on the T-connector to the inlet on the PAS Optical Block (i.e. [Push Mode](file://localhost/Users/al/Dropbox/manual_MultiPAS/_book/flow-system.html#push-mode), do NOT go through the control box).
+     ```{r out.width='60px', echo=FALSE, fig.align='center'}
+knitr::include_graphics("./images/warning_generic.png")
+     ```
+     
+    > ***The tubing, filters, and pump inside the PAS control box can be damaged by NO$_2$!***
+
+## Calibration Procedure
+
+*Note: The following guidelines work at 785 nm but can be adjusted to acheive the appropriate absorption for the wavelength used.  For example, the absorption cross section is an order of magnitude higher at 660 nm, so nitrogen flows would increase and NO$_2$ flows would decrease to acheive absorption in the 1-100 Mm$^{-1}$ range desired.  NO$_2$ cannot be accurately measured with photoacoustic methods below 420 nm.*
+
+1.  Set the N$_2$ flow to 100 SCCM and purge the PAS for 10-15 minutes.
+1.  After purging with nitrogen, conduct a frequency sweep to measure the resonance frequency and set the modulation source.  The resonance frequency for a cell filled with nitrogen is typically 1395-1400 Hz.  After the sweep is complete, turn off all lasers except the 782 nm diode.
+1.  Record $I_0$ values in the calibration calculator spreadsheet.  Enter the measured powers at this time, as well.
+1.  Open the NO$_2$ cylinder and set the flow to ~1000 SCCM for roughly 30 seconds; this allows NO$_2$ to equillibrate in the system and begin to passivate the tubing.
+1.  Set the NO$_2$ flow to 200 SCCM.
+1.  Once the PAS microphone signal is stable, record the value in the calibration calculator spreadsheet.
+1.  Set the NO$_2$ flow to 150 SCCM and repet the above step.
+1.  Repeat the above two steps until you have measured 200, 150, 100, 75, and 50 SCCM flows of NO$_2$.
+1.  The slope for the calibration is typically ~100,000 V/W-cm.  Enter the calculated value into the LabVIEW program in the **Cell Calibration** box.
