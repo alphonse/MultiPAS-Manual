@@ -1,0 +1,92 @@
+# Data Processing
+
+The MultiPAS system outputs two types of files during autonomous running: (1) the `pas.txt` tab-separated document containing both the raw and processed data for the PAS and (2) text files in the `sweeps` folder containing a record of each frequency sweep conducted.  Although the main data file contains data that has been processed in real time, it is recommeneded that data is post-processed from the raw data prior to publication.  Although data can be processed in any scientific computing or spreadhseet software, an [R](https://www.r-project.org/about.html) package, `aeRo`, has been developed to aid in data processing and is available via [GitHub](https://github.com/).
+
+## Processing Data with R
+
+The R package `aeRo` has been developed (or rather, is currently under development) to aid in processing MultiPAS data with R.
+
+R is open-source and freely available from the [R Project for Statistical Computing](https://www.r-project.org/).  If using R, [RStudio](https://www.rstudio.com/products/rstudio/download/), an open-source and freely available IDE for R, is *highly* recommened for ease of using R.
+
+### The aeRo Package
+
+The first step to processing data in R is to install `aeRo`.  The package `devtools` will be needed to install aeRo from the command line.
+
+```{r install-packages, message=FALSE, warning=FALSE}
+# Install the devtools package and then load it
+options(repos="http://archive.linux.duke.edu/cran/") # not necessary if installing from RStudio's package manager
+install.packages('devtools')
+library(devtools)
+
+# Now, use it to install aeRo and then load aeRo
+install_github('alphonse/aeRo')
+library(aeRo)
+```
+
+You can see the functions available in `aeRo` by clicking on its name in the "Pacakges" tab within RStudio, executing `help(package = aeRo)`, or with the `ls()` command.
+
+```{r ls-aero}
+ls('package:aeRo')
+```
+
+More information on any command can be obtained by typing a question mark followed by the command.  For example, the help file for `importPAS` is found with `?importPAS`.
+
+### Loading data into R
+To load data into R, first call `importPAS()` and then subset and align the data via the graphical display to the start index of the first filter period using `chooseFilterStart`.  `chooseFilterStart` requires user input to the console based on the values selected on the plot.  Alternatively, if the start index is already known, you may use the argument `graph = FALSE` and `start = index` to bypass the graphical selector.  The function will also make the data length a multiple of `period`.
+
+```{r import, message=FALSE}
+library(dplyr)
+setwd("/Volumes/CHEM/Groups/Smith_G/MultiPAS-IV/ambient/20170303")
+pas <- importPAS('pas.txt', no.cols = 18) %>%
+  # chooseFilterStart()  ## typically uncommented, for graphical interface
+  chooseFilterStart(graph = FALSE, start = 1430) # only used when start point is already known, comment otherwise.
+```
+
+### Exploring MultiPAS Data
+
+The PAS outputs a tab-separated text file of the raw and processed MultiPAS data.  Columns are named according to the content, with the convention Ch1 = shortest laser wavelength.  
+
+```{r explore}
+# Display a few rows as an example
+head(pas)
+```
+
+As seen in the above snippet, the data file contains the following columns (18 total):
+
+1. **Time:** Sample time in the non-ambiguous UNIX/POSIX time standard, 'YYYY-MM-DD HH:MM:SS'.
+1. **micCh1_mV -- micCh4_mV:** The raw microphone signal in mV for each channel; if only 3 channels are present Ch4 will be filled with '0'.
+1. **pdCh1_mV -- pdCh4_mV:** The raw photodiode signal in mV for each channel; if only 3 channels are present Ch4 will be filled with '0'.
+1. **tau_sec:** The ringdown time in seconds; for systems without a CRD, will be filled with '0'.
+1. **babsCh1_Mm -- babsCh4_Mm:** The real-time absorption in 1/Mm for each channel; if only 3 channels are present Ch4 will be filled with '0'.
+1. **bextCh1_Mm:** The real-time exticntion in 1/Mm for each channel; if no CRD is present no extinction is measured and column will be filled with '0'.
+1. **fres_Hz:** The resonant frequency in Hz used during each sampling period.
+1. **filter_state:** A boolean indicating whether the filter is out (`0`) or inline (`1`).
+1. **elapsedTime_min:** The elapsed time in minutes since the start of the last filter; displays the maximum value during the frequency sweep.
+
+### Processing The Data
+With `aeRo`, data can be processed by stringing together a few functions.
+
+```{r process, warning=FALSE, message=FALSE}
+# Calculate powers, backgrounds, and tau_0, and add to main data.frame
+pas <- cbind(pas, getBg(pas)) %>%
+  cbind(averagePower(pas)) %>%
+  cbind(tau0_s = getTau0(pas$tau_sec))
+
+# Convert data to absorption & extinction
+pas <- cbind(pas, convertToAbs(x=pas[, 2:5], bg=pas[, 19:22], p=pas[, 23:26], m=114000)) %>%
+  cbind(ext662_Mm = convertToExt(pas$tau_sec, pas$tau0_s))
+# Set background periods to NA for cleanliness in plotting
+pas[which(pas$filter_state == 1 | pas$elapsedTime_min > 23.5 | pas$elapsedTime_min < 2.0), 28:32] <- NA
+# Add rolling average via "zoo" pacakge, but exlude NAs
+library(zoo)
+pas[!is.na(pas$abs406_Mm), 28:32] <- rollmean(na.exclude(pas[, 28:32]), k = 120, fill = NA)
+```
+
+### Plot data
+`aeRo` includes a plot class specifically for absorption data: `plot.abs()`.   Argruments can be passed to `plot()` to change the look of the plot.
+
+```{r plot}
+plot.abs(x = pas$Time, y = pas[, 28:32])
+```
+
+Further functions for calculating AAE, SSAs, etc., are forthcoming.

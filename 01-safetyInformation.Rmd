@@ -1,5 +1,5 @@
 # Safety Information
-Certain aspects of this instrument may pose a risk to the user, bystanders, and personal property.  This section provides an *overview* of potential hazards, and more detail is provided within the manual body.  Follow all applicable local and federal laws regarding laser operation and hazardous materials when working with the instrument.
+Certain aspects of this instrument may pose a risk to the user, bystanders, and personal property.  This section provides an *overview* of potential hazards, and more detail is provided within the manual body.  Follow all applicable laws regarding laser operation and hazardous materials when working with the instrument.
 
 ## Symbol Defintions
 
@@ -21,13 +21,7 @@ knitr::include_graphics("./images/warning_highVoltage.png")
 **Electrical shock hazard:** This symbol indicates a potential electrical shock.  Ensure the instrument is unplugged before continuing.
 
 ## Personal Safety Information
-This instrument contains class 3b diode lasers operating at 423 nm, 532 nm, and 781 nm.  Direct eye or skin contact with the beam(s) may cause permament personal injury!  Avoid direct eye contact with the beam and wear safety goggles of appropriate optical density when necessary!  Avoid placing hands in the laser beam(s)! Be weary of wearing rings, watches, or other reflective objects that may cause erratic reflections when working in the beam.  Likewise, be careful of reflections from tools that may be placed in the beam.
-
-<center>
-```{r out.width='500px', echo=FALSE}
-knitr::include_graphics("./images/laserSafetyPamphlet.png")
-```
-</center>
+This instrument contains visible and invisible class 3b diode lasers operating at UV, visible, and/or infrared.  Direct eye or skin contact with the beam(s) may cause permament personal injury!  Avoid direct eye contact with the beam and wear safety goggles of appropriate optical density when necessary!  Avoid placing hands in the laser beam(s)! Be weary of wearing rings, watches, or other reflective objects that may cause erratic reflections when working in the beam.  Likewise, be careful of reflections from tools that may be placed in the beam.
 
 The control box for this instrument contains 120 VAC wiring.  Ensure the instrument is unplugged before opening the control box for maintenance!
 

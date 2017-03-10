@@ -32,8 +32,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="data-processing.html">
-<link rel="next" href="electrical.html">
+<link rel="prev" href="calibration.html">
+<link rel="next" href="flow-system.html">
 
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -174,32 +174,110 @@ Published in R with bookdown</a></li>
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="flow-system" class="section level1">
-<h1><span class="header-section-number">6</span> Flow System</h1>
-<p>The PAS can be operated in two flow modes, “Pull Mode” (usually for aerosols) and “Push Mode” (usually for gases). A flow diagram for the PAS is shown below.</p>
-<p><img src="images/flowDiagram.png" style="display: block; margin: auto;" /></p>
-<div id="pull-mode" class="section level2">
-<h2><span class="header-section-number">6.1</span> Pull Mode</h2>
-<p>Pull Mode is recommended for normal sampling of aerosols and situations in which the sample is at ambient atmospheric pressure. In pull mode, the PAS uses an internal pump to pull sample through the instrument. In this mode, the sample is connected to the “Sample In” port on the control box (Point A). From there, it passes through a software-controlled valve to enter or bypass a HEPA filter for background measurement. It then exits the control box via the “Sample Out to PAS” port (Point B) and enters the PAS. An acoustic filter separates the PAS from downstream equipment. After leaving the optical block, the sample line re-enters the control box via the “Pump In” port (Point E). Points C and D are the ports through which the flow enters and exits the optical block enclosure. The flow is set by a flow limiting orifice under critial flow conditions. A 0.2 micron filter is placed directly after point E to protect the flow-limiting orifice and pump from particulates.</p>
-<center>
-<img src="images/warning_generic.png" width="50px" />
-</center>
-<blockquote>
-<p><strong><em>The pump may be damaged by certain chemicals. Therefore, it is recommened to only use the pump for air or with adequate chemical scrubbers inline before the pump.</em></strong></p>
-</blockquote>
-<p>A trim-pot is located on the pump inside the control box. If the PAS is not reaching it’s desired flow, the trim-pot may be adjusted to compensate. Use a nut driver to remove the front panel and then use a screw driver to adjust the potentiometer attached to the pump just inside the front panel. The pump trim-pot is outlined in blue below.</p>
-<center>
-<img src="images/pumpTrimPot.jpg" width="500px" />
-</center>
-</div>
-<div id="push-mode" class="section level2">
-<h2><span class="header-section-number">6.2</span> Push Mode</h2>
-<p>Push Mode is recommended for calibrations with nitrogen dioxide and when sampling other high-pressure samples. In this mode, the pressure and flow must be regulated externally from the PAS using, for example, a pressure regulator and mass flow controller. An maximum flow rate of &lt; 450 SCCM (standard cubic centimeters per minute) must be maintained to avoid turbulent flow.</p>
-<blockquote>
-<p><em>Flows &gt; 450 SCCM may cause excessive noise and/or overload the microphone!</em></p>
-</blockquote>
-<p>The flow-regulated sample is connected directly to the PAS optical block enclosure (Point C) and the exhaust is vented appropriately (e.g. to a fume hood) through point D. Note that the control box is entirely bypassed.</p>
+<div id="data-processing" class="section level1">
+<h1><span class="header-section-number">5</span> Data Processing</h1>
+<p>The MultiPAS system outputs two types of files during autonomous running: (1) the <code>pas.txt</code> tab-separated document containing both the raw and processed data for the PAS and (2) text files in the <code>sweeps</code> folder containing a record of each frequency sweep conducted. Although the main data file contains data that has been processed in real time, it is recommeneded that data is post-processed from the raw data prior to publication. Although data can be processed in any scientific computing or spreadhseet software, an <a href="https://www.r-project.org/about.html">R</a> package, <code>aeRo</code>, has been developed to aid in data processing and is available via <a href="https://github.com/">GitHub</a>.</p>
+<div id="processing-data-with-r" class="section level2">
+<h2><span class="header-section-number">5.1</span> Processing Data with R</h2>
+<p>The R package <code>aeRo</code> has been developed (or rather, is currently under development) to aid in processing MultiPAS data with R.</p>
+<p>R is open-source and freely available from the <a href="https://www.r-project.org/">R Project for Statistical Computing</a>. If using R, <a href="https://www.rstudio.com/products/rstudio/download/">RStudio</a>, an open-source and freely available IDE for R, is <em>highly</em> recommened for ease of using R.</p>
+<div id="the-aero-package" class="section level3">
+<h3><span class="header-section-number">5.1.1</span> The aeRo Package</h3>
+<p>The first step to processing data in R is to install <code>aeRo</code>. The package <code>devtools</code> will be needed to install aeRo from the command line.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Install the devtools package and then load it</span>
+<span class="kw">options</span>(<span class="dt">repos=</span><span class="st">&quot;http://archive.linux.duke.edu/cran/&quot;</span>) <span class="co"># not necessary if installing from RStudio&#39;s package manager</span>
+<span class="kw">install.packages</span>(<span class="st">&#39;devtools&#39;</span>)</code></pre></div>
+<pre><code>## 
+## The downloaded binary packages are in
+##  /var/folders/p_/3j0qd_7s7tzdm94x3cwyj7_m0000gn/T//RtmpRJ2oNa/downloaded_packages</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(devtools)
 
+<span class="co"># Now, use it to install aeRo and then load aeRo</span>
+<span class="kw">install_github</span>(<span class="st">&#39;alphonse/aeRo&#39;</span>)
+<span class="kw">library</span>(aeRo)</code></pre></div>
+<p>You can see the functions available in <code>aeRo</code> by clicking on its name in the “Pacakges” tab within RStudio, executing <code>help(package = aeRo)</code>, or with the <code>ls()</code> command.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ls</span>(<span class="st">&#39;package:aeRo&#39;</span>)</code></pre></div>
+<pre><code>##  [1] &quot;averagePower&quot;       &quot;averagePower.waves&quot; &quot;blockMeans&quot;        
+##  [4] &quot;blockMeans.single&quot;  &quot;chooseFilterStart&quot;  &quot;compileAeth&quot;       
+##  [7] &quot;convertToAbs&quot;       &quot;convertToExt&quot;       &quot;fillToLength&quot;      
+## [10] &quot;fitAAE&quot;             &quot;getBg&quot;              &quot;getBg.waves&quot;       
+## [13] &quot;getTau0&quot;            &quot;importAeth&quot;         &quot;importPAS&quot;         
+## [16] &quot;plot.abs&quot;           &quot;plot.ssa&quot;</code></pre>
+<p>More information on any command can be obtained by typing a question mark followed by the command. For example, the help file for <code>importPAS</code> is found with <code>?importPAS</code>.</p>
+</div>
+<div id="loading-data-into-r" class="section level3">
+<h3><span class="header-section-number">5.1.2</span> Loading data into R</h3>
+<p>To load data into R, first call <code>importPAS()</code> and then subset and align the data via the graphical display to the start index of the first filter period using <code>chooseFilterStart</code>. <code>chooseFilterStart</code> requires user input to the console based on the values selected on the plot. Alternatively, if the start index is already known, you may use the argument <code>graph = FALSE</code> and <code>start = index</code> to bypass the graphical selector. The function will also make the data length a multiple of <code>period</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(dplyr)
+<span class="kw">setwd</span>(<span class="st">&quot;/Volumes/CHEM/Groups/Smith_G/MultiPAS-IV/ambient/20170303&quot;</span>)
+pas &lt;-<span class="st"> </span><span class="kw">importPAS</span>(<span class="st">&#39;pas.txt&#39;</span>, <span class="dt">no.cols =</span> <span class="dv">18</span>) %&gt;%
+<span class="st">  </span><span class="co"># chooseFilterStart()  ## typically uncommented, for graphical interface</span>
+<span class="st">  </span><span class="kw">chooseFilterStart</span>(<span class="dt">graph =</span> <span class="ot">FALSE</span>, <span class="dt">start =</span> <span class="dv">1430</span>) <span class="co"># only used when start point is already known, comment otherwise.</span></code></pre></div>
+</div>
+<div id="exploring-multipas-data" class="section level3">
+<h3><span class="header-section-number">5.1.3</span> Exploring MultiPAS Data</h3>
+<p>The PAS outputs a tab-separated text file of the raw and processed MultiPAS data. Columns are named according to the content, with the convention Ch1 = shortest laser wavelength.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Display a few rows as an example</span>
+<span class="kw">head</span>(pas)</code></pre></div>
+<pre><code>##                     Time micCh1_mV micCh2_mV micCh3_mV micCh4_mV pdCh1_mV
+## 1430 2017-03-03 18:39:32    22.743    11.938    7.2965    6.9984   593.96
+## 1431 2017-03-03 18:39:33    22.798    11.813    7.2420    6.9810   594.03
+## 1432 2017-03-03 18:39:34    22.694    11.159    6.8411    6.5995   594.05
+## 1433 2017-03-03 18:39:35    22.688    10.988    6.7961    6.5283   594.12
+## 1434 2017-03-03 18:39:36    21.352    10.392    6.4951    6.1681   584.84
+## 1435 2017-03-03 18:39:37    21.181    10.229    6.3737    6.0705   584.75
+##      pdCh2_mV pdCh3_mV pdCh4_mV    tau_sec babsCh1_Mm babsCh2_Mm
+## 1430   1073.4   864.07   806.18 3.6586e-05    0.35654   -0.29381
+## 1431   1072.9   863.74   806.00 3.3154e-05    0.31628   -0.99175
+## 1432   1056.2   850.29   793.51 2.9407e-05    0.40930   -1.10790
+## 1433   1055.5   849.70   793.08 1.7895e-05    0.23405   -1.74540
+## 1434   1039.0   836.43   780.69 1.2059e-05    0.22452   -1.90810
+## 1435   1038.1   835.57   780.02 2.1839e-05   -2.05710   -2.51240
+##      babsCh3_Mm babsCh4_Mm bext_Mm fres_Hz filter_state elapsedTime_min
+## 1430   -0.21158  -0.012408  36.964    1392            0              24
+## 1431   -0.70289  -0.472130  44.498    1392            0              24
+## 1432   -0.76618  -0.493860  55.666    1392            0              24
+## 1433   -1.24990  -0.982410  70.830    1392            0              24
+## 1434   -1.30360  -1.072700 157.160    1392            0              24
+## 1435   -1.68420  -1.551100 263.900    1392            0              24</code></pre>
+<p>As seen in the above snippet, the data file contains the following columns (18 total):</p>
+<ol style="list-style-type: decimal">
+<li><strong>Time:</strong> Sample time in the non-ambiguous UNIX/POSIX time standard, ‘YYYY-MM-DD HH:MM:SS’.</li>
+<li><strong>micCh1_mV – micCh4_mV:</strong> The raw microphone signal in mV for each channel; if only 3 channels are present Ch4 will be filled with ‘0’.</li>
+<li><strong>pdCh1_mV – pdCh4_mV:</strong> The raw photodiode signal in mV for each channel; if only 3 channels are present Ch4 will be filled with ‘0’.</li>
+<li><strong>tau_sec:</strong> The ringdown time in seconds; for systems without a CRD, will be filled with ‘0’.</li>
+<li><strong>babsCh1_Mm – babsCh4_Mm:</strong> The real-time absorption in 1/Mm for each channel; if only 3 channels are present Ch4 will be filled with ‘0’.</li>
+<li><strong>bextCh1_Mm:</strong> The real-time exticntion in 1/Mm for each channel; if no CRD is present no extinction is measured and column will be filled with ‘0’.</li>
+<li><strong>fres_Hz:</strong> The resonant frequency in Hz used during each sampling period.</li>
+<li><strong>filter_state:</strong> A boolean indicating whether the filter is out (<code>0</code>) or inline (<code>1</code>).</li>
+<li><strong>elapsedTime_min:</strong> The elapsed time in minutes since the start of the last filter; displays the maximum value during the frequency sweep.</li>
+</ol>
+</div>
+<div id="processing-the-data" class="section level3">
+<h3><span class="header-section-number">5.1.4</span> Processing The Data</h3>
+<p>With <code>aeRo</code>, data can be processed by stringing together a few functions.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Calculate powers, backgrounds, and tau_0, and add to main data.frame</span>
+pas &lt;-<span class="st"> </span><span class="kw">cbind</span>(pas, <span class="kw">getBg</span>(pas)) %&gt;%
+<span class="st">  </span><span class="kw">cbind</span>(<span class="kw">averagePower</span>(pas)) %&gt;%
+<span class="st">  </span><span class="kw">cbind</span>(<span class="dt">tau0_s =</span> <span class="kw">getTau0</span>(pas$tau_sec))
+
+<span class="co"># Convert data to absorption &amp; extinction</span>
+pas &lt;-<span class="st"> </span><span class="kw">cbind</span>(pas, <span class="kw">convertToAbs</span>(<span class="dt">x=</span>pas[, <span class="dv">2</span>:<span class="dv">5</span>], <span class="dt">bg=</span>pas[, <span class="dv">19</span>:<span class="dv">22</span>], <span class="dt">p=</span>pas[, <span class="dv">23</span>:<span class="dv">26</span>], <span class="dt">m=</span><span class="dv">114000</span>)) %&gt;%
+<span class="st">  </span><span class="kw">cbind</span>(<span class="dt">ext662_Mm =</span> <span class="kw">convertToExt</span>(pas$tau_sec, pas$tau0_s))
+<span class="co"># Set background periods to NA for cleanliness in plotting</span>
+pas[<span class="kw">which</span>(pas$filter_state ==<span class="st"> </span><span class="dv">1</span> |<span class="st"> </span>pas$elapsedTime_min &gt;<span class="st"> </span><span class="fl">23.5</span> |<span class="st"> </span>pas$elapsedTime_min &lt;<span class="st"> </span><span class="fl">2.0</span>), <span class="dv">28</span>:<span class="dv">32</span>] &lt;-<span class="st"> </span><span class="ot">NA</span>
+<span class="co"># Add rolling average via &quot;zoo&quot; pacakge, but exlude NAs</span>
+<span class="kw">library</span>(zoo)
+pas[!<span class="kw">is.na</span>(pas$abs406_Mm), <span class="dv">28</span>:<span class="dv">32</span>] &lt;-<span class="st"> </span><span class="kw">rollmean</span>(<span class="kw">na.exclude</span>(pas[, <span class="dv">28</span>:<span class="dv">32</span>]), <span class="dt">k =</span> <span class="dv">120</span>, <span class="dt">fill =</span> <span class="ot">NA</span>)</code></pre></div>
+</div>
+<div id="plot-data" class="section level3">
+<h3><span class="header-section-number">5.1.5</span> Plot data</h3>
+<p><code>aeRo</code> includes a plot class specifically for absorption data: <code>plot.abs()</code>. Argruments can be passed to <code>plot()</code> to change the look of the plot.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot.abs</span>(<span class="dt">x =</span> pas$Time, <span class="dt">y =</span> pas[, <span class="dv">28</span>:<span class="dv">32</span>])</code></pre></div>
+<p><img src="_main_files/figure-html/plot-1.png" width="672" /></p>
+<p>Further functions for calculating AAE, SSAs, etc., are forthcoming.</p>
+
+</div>
 </div>
 </div>
             </section>
@@ -207,8 +285,8 @@ Published in R with bookdown</a></li>
           </div>
         </div>
       </div>
-<a href="data-processing.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="electrical.html" class="navigation navigation-next " aria-label="Next page""><i class="fa fa-angle-right"></i></a>
+<a href="calibration.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="flow-system.html" class="navigation navigation-next " aria-label="Next page""><i class="fa fa-angle-right"></i></a>
 
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/lunr.js"></script>

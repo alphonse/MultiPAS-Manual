@@ -1,6 +1,6 @@
 # Connecting the Instrument
 
-The MultiPAS consists of two primary components: (1) the optical block and (2) the control box.  Both the sample and signals flow between the two components, require the two to be connected both hydraulically and electrically.  The two components should be placed near each other on a flat, level, vibration- and sound-free surface.
+The MultiPAS consists of two primary components: (1) the optical block and (2) the control box.  Both the sample and signals flow between the two components, requiring the two to be connected both hydraulically and electrically.  The two components should be placed near each other on a flat, level, vibration- and sound-free surface.
 
 
 ```{r echo=FALSE, fig.align='center'}
@@ -8,7 +8,7 @@ knitr::include_graphics("./images/pasOverview.png")
 ```
 
 ## Connecting the Control Box
-1. Pass the electrical umbilical through the hole in the PAS case and connect the three SDR cables to the back of each laser; note the color code on the cables (blue = 423 nm, green = 532 nm, red = 781 nm).
+1. Pass the electrical umbilical through the hole in the PAS case and connect the three SDR cables to the back of each laser; note the color code on the cables.
 1. Connect the photodiode to the **Photodiode** connection on the control box with a coaxial cable via the BNC connections.  Also connect the photodiode to the supplied +/-12 V power supply via the threaded, 3-pin connector.
 
      ```{r out.width='60px', echo=FALSE, fig.align='center'}

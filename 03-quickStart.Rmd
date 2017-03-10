@@ -3,12 +3,12 @@
 This section outlines the basic steps needed to start sampling with the PAS for the first time and after it has been turned off.  It assumes the instrument has been connected according to [Chapter 2](connecting-the-instrument.html).
 
 ## Installation
-1. Download and install the following third-party software:
-    - [LabVIEW run time engine](http://www.ni.com/download/labview-run-time-engine-2016/6067/en/) 2011 or later (National Instruments)
+1. Download or locate and install the following third-party software:
+    - [LabVIEW run time engine](http://www.ni.com/download/labview-run-time-engine-2016/6067/en/) 2011 (National Instruments)
     - [WaveIO](https://www.zeitnitz.eu/scms/waveio) (Christian Zeitnitz)
     - OBIS Connection (supplied on USB flash drive, Coherent, Inc.) 
-1. Download the [MultiPAS-III](https://github.com/alphonse/MultiPAS-III/tree/master/exec) (3 wavelengths) or [MultiPAS-IV](https://github.com/alphonse/MultiPAS-IV/tree/master/exec) executable.
-1. Connect the USB cable to the computer and let Windows Update install the necessary drivers.
+1. Locate the [MultiPAS-III](https://github.com/alphonse/MultiPAS-III/tree/master/exec) (3 wavelengths) or [MultiPAS-IV](https://github.com/alphonse/MultiPAS-IV/tree/master/exec) executable.
+1. Connect the USB cable to the computer and let Windows install the necessary drivers.
 1. Open OBIS Connection to determine the COM ports for the lasers, listed by wavelength on the left side of OBIS Connection.  Write down for use in the LabVIEW program.
 
 ## Powering On
