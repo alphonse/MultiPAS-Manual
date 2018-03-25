@@ -14,7 +14,8 @@ The first step to processing data in R is to install `aeRo`.  The package `devto
 
 ```{r install-packages, message=FALSE, warning=FALSE}
 # Install the devtools package and then load it
-options(repos="http://archive.linux.duke.edu/cran/") # not necessary if installing from RStudio's package manager
+options(repos="http://archive.linux.duke.edu/cran/") # not necessary if installing from 
+# RStudio's package manager
 install.packages('devtools')
 library(devtools)
 
@@ -39,7 +40,8 @@ library(dplyr)
 setwd("/Volumes/CHEM/Groups/Smith_G/MultiPAS-IV/ambient/20170303")
 pas <- importPAS('pas.txt', no.cols = 18) %>%
   # chooseFilterStart()  ## typically uncommented, for graphical interface
-  chooseFilterStart(graph = FALSE, start = 1430) # only used when start point is already known, comment otherwise.
+  chooseFilterStart(graph = FALSE, start = 1430) # only used when start point
+  #  is already known, comment otherwise.
 ```
 
 ### Exploring MultiPAS Data
