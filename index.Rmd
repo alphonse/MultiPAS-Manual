@@ -16,8 +16,8 @@ output:
   bookdown::epub_book: default
   bookdown::pdf_book: default
 site: bookdown::bookdown_site
-github-repo: alphonse/MultiPAS-Manual
-url: https\://alphonse.github.io/multipas-manual/
+github-repo: "alphonse/MultiPAS-Manual"
+url: 'https\://alphonse.github.io/multipas-manual/'
 documentclass: book
 ---
 
