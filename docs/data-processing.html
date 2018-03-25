@@ -6,9 +6,8 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>MultiPAS User’s Guide</title>
-  <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
   <meta name="description" content="MultiPAS User’s Guide">
-  <meta name="generator" content="bookdown 0.3 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown 0.6 and GitBook 2.6.7">
 
   <meta property="og:title" content="MultiPAS User’s Guide" />
   <meta property="og:type" content="book" />
@@ -34,7 +33,6 @@
   
 <link rel="prev" href="calibration.html">
 <link rel="next" href="flow-system.html">
-
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -91,6 +89,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </head>
 
 <body>
+
 
 
   <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
@@ -154,8 +153,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="9.2" data-path="troubleshooting.html"><a href="troubleshooting.html#common-hardware-errors"><i class="fa fa-check"></i><b>9.2</b> Common Hardware Errors</a></li>
 </ul></li>
 <li class="divider"></li>
-<li><a href="https://bookdown.org">
 Published in R with bookdown</a></li>
+<li><a href="https://bookdown.org">
 
 </ul>
 
@@ -185,11 +184,12 @@ Published in R with bookdown</a></li>
 <h3><span class="header-section-number">5.1.1</span> The aeRo Package</h3>
 <p>The first step to processing data in R is to install <code>aeRo</code>. The package <code>devtools</code> will be needed to install aeRo from the command line.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Install the devtools package and then load it</span>
-<span class="kw">options</span>(<span class="dt">repos=</span><span class="st">&quot;http://archive.linux.duke.edu/cran/&quot;</span>) <span class="co"># not necessary if installing from RStudio&#39;s package manager</span>
+<span class="kw">options</span>(<span class="dt">repos=</span><span class="st">&quot;http://archive.linux.duke.edu/cran/&quot;</span>) <span class="co"># not necessary if installing from </span>
+<span class="co"># RStudio&#39;s package manager</span>
 <span class="kw">install.packages</span>(<span class="st">&#39;devtools&#39;</span>)</code></pre></div>
 <pre><code>## 
 ## The downloaded binary packages are in
-##  /var/folders/p_/3j0qd_7s7tzdm94x3cwyj7_m0000gn/T//RtmpRJ2oNa/downloaded_packages</code></pre>
+##  /var/folders/p_/3j0qd_7s7tzdm94x3cwyj7_m0000gn/T//RtmpaqPTDf/downloaded_packages</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(devtools)
 
 <span class="co"># Now, use it to install aeRo and then load aeRo</span>
@@ -210,9 +210,10 @@ Published in R with bookdown</a></li>
 <p>To load data into R, first call <code>importPAS()</code> and then subset and align the data via the graphical display to the start index of the first filter period using <code>chooseFilterStart</code>. <code>chooseFilterStart</code> requires user input to the console based on the values selected on the plot. Alternatively, if the start index is already known, you may use the argument <code>graph = FALSE</code> and <code>start = index</code> to bypass the graphical selector. The function will also make the data length a multiple of <code>period</code>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(dplyr)
 <span class="kw">setwd</span>(<span class="st">&quot;/Volumes/CHEM/Groups/Smith_G/MultiPAS-IV/ambient/20170303&quot;</span>)
-pas &lt;-<span class="st"> </span><span class="kw">importPAS</span>(<span class="st">&#39;pas.txt&#39;</span>, <span class="dt">no.cols =</span> <span class="dv">18</span>) %&gt;%
+pas &lt;-<span class="st"> </span><span class="kw">importPAS</span>(<span class="st">&#39;pas.txt&#39;</span>, <span class="dt">no.cols =</span> <span class="dv">18</span>) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="co"># chooseFilterStart()  ## typically uncommented, for graphical interface</span>
-<span class="st">  </span><span class="kw">chooseFilterStart</span>(<span class="dt">graph =</span> <span class="ot">FALSE</span>, <span class="dt">start =</span> <span class="dv">1430</span>) <span class="co"># only used when start point is already known, comment otherwise.</span></code></pre></div>
+<span class="st">  </span><span class="kw">chooseFilterStart</span>(<span class="dt">graph =</span> <span class="ot">FALSE</span>, <span class="dt">start =</span> <span class="dv">1430</span>) <span class="co"># only used when start point</span>
+  <span class="co">#  is already known, comment otherwise.</span></code></pre></div>
 </div>
 <div id="exploring-multipas-data" class="section level3">
 <h3><span class="header-section-number">5.1.3</span> Exploring MultiPAS Data</h3>
@@ -257,23 +258,23 @@ pas &lt;-<span class="st"> </span><span class="kw">importPAS</span>(<span class=
 <h3><span class="header-section-number">5.1.4</span> Processing The Data</h3>
 <p>With <code>aeRo</code>, data can be processed by stringing together a few functions.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Calculate powers, backgrounds, and tau_0, and add to main data.frame</span>
-pas &lt;-<span class="st"> </span><span class="kw">cbind</span>(pas, <span class="kw">getBg</span>(pas)) %&gt;%
-<span class="st">  </span><span class="kw">cbind</span>(<span class="kw">averagePower</span>(pas)) %&gt;%
-<span class="st">  </span><span class="kw">cbind</span>(<span class="dt">tau0_s =</span> <span class="kw">getTau0</span>(pas$tau_sec))
+pas &lt;-<span class="st"> </span><span class="kw">cbind</span>(pas, <span class="kw">getBg</span>(pas)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">cbind</span>(<span class="kw">averagePower</span>(pas)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">cbind</span>(<span class="dt">tau0_s =</span> <span class="kw">getTau0</span>(pas<span class="op">$</span>tau_sec))
 
 <span class="co"># Convert data to absorption &amp; extinction</span>
-pas &lt;-<span class="st"> </span><span class="kw">cbind</span>(pas, <span class="kw">convertToAbs</span>(<span class="dt">x=</span>pas[, <span class="dv">2</span>:<span class="dv">5</span>], <span class="dt">bg=</span>pas[, <span class="dv">19</span>:<span class="dv">22</span>], <span class="dt">p=</span>pas[, <span class="dv">23</span>:<span class="dv">26</span>], <span class="dt">m=</span><span class="dv">114000</span>)) %&gt;%
-<span class="st">  </span><span class="kw">cbind</span>(<span class="dt">ext662_Mm =</span> <span class="kw">convertToExt</span>(pas$tau_sec, pas$tau0_s))
+pas &lt;-<span class="st"> </span><span class="kw">cbind</span>(pas, <span class="kw">convertToAbs</span>(<span class="dt">x=</span>pas[, <span class="dv">2</span><span class="op">:</span><span class="dv">5</span>], <span class="dt">bg=</span>pas[, <span class="dv">19</span><span class="op">:</span><span class="dv">22</span>], <span class="dt">p=</span>pas[, <span class="dv">23</span><span class="op">:</span><span class="dv">26</span>], <span class="dt">m=</span><span class="dv">114000</span>)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">cbind</span>(<span class="dt">ext662_Mm =</span> <span class="kw">convertToExt</span>(pas<span class="op">$</span>tau_sec, pas<span class="op">$</span>tau0_s))
 <span class="co"># Set background periods to NA for cleanliness in plotting</span>
-pas[<span class="kw">which</span>(pas$filter_state ==<span class="st"> </span><span class="dv">1</span> |<span class="st"> </span>pas$elapsedTime_min &gt;<span class="st"> </span><span class="fl">23.5</span> |<span class="st"> </span>pas$elapsedTime_min &lt;<span class="st"> </span><span class="fl">2.0</span>), <span class="dv">28</span>:<span class="dv">32</span>] &lt;-<span class="st"> </span><span class="ot">NA</span>
+pas[<span class="kw">which</span>(pas<span class="op">$</span>filter_state <span class="op">==</span><span class="st"> </span><span class="dv">1</span> <span class="op">|</span><span class="st"> </span>pas<span class="op">$</span>elapsedTime_min <span class="op">&gt;</span><span class="st"> </span><span class="fl">23.5</span> <span class="op">|</span><span class="st"> </span>pas<span class="op">$</span>elapsedTime_min <span class="op">&lt;</span><span class="st"> </span><span class="fl">2.0</span>), <span class="dv">28</span><span class="op">:</span><span class="dv">32</span>] &lt;-<span class="st"> </span><span class="ot">NA</span>
 <span class="co"># Add rolling average via &quot;zoo&quot; pacakge, but exlude NAs</span>
 <span class="kw">library</span>(zoo)
-pas[!<span class="kw">is.na</span>(pas$abs406_Mm), <span class="dv">28</span>:<span class="dv">32</span>] &lt;-<span class="st"> </span><span class="kw">rollmean</span>(<span class="kw">na.exclude</span>(pas[, <span class="dv">28</span>:<span class="dv">32</span>]), <span class="dt">k =</span> <span class="dv">120</span>, <span class="dt">fill =</span> <span class="ot">NA</span>)</code></pre></div>
+pas[<span class="op">!</span><span class="kw">is.na</span>(pas<span class="op">$</span>abs406_Mm), <span class="dv">28</span><span class="op">:</span><span class="dv">32</span>] &lt;-<span class="st"> </span><span class="kw">rollmean</span>(<span class="kw">na.exclude</span>(pas[, <span class="dv">28</span><span class="op">:</span><span class="dv">32</span>]), <span class="dt">k =</span> <span class="dv">120</span>, <span class="dt">fill =</span> <span class="ot">NA</span>)</code></pre></div>
 </div>
 <div id="plot-data" class="section level3">
 <h3><span class="header-section-number">5.1.5</span> Plot data</h3>
 <p><code>aeRo</code> includes a plot class specifically for absorption data: <code>plot.abs()</code>. Argruments can be passed to <code>plot()</code> to change the look of the plot.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot.abs</span>(<span class="dt">x =</span> pas$Time, <span class="dt">y =</span> pas[, <span class="dv">28</span>:<span class="dv">32</span>])</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot.abs</span>(<span class="dt">x =</span> pas<span class="op">$</span>Time, <span class="dt">y =</span> pas[, <span class="dv">28</span><span class="op">:</span><span class="dv">32</span>])</code></pre></div>
 <p><img src="_main_files/figure-html/plot-1.png" width="672" /></p>
 <p>Further functions for calculating AAE, SSAs, etc., are forthcoming.</p>
 
@@ -286,8 +287,9 @@ pas[!<span class="kw">is.na</span>(pas$abs406_Mm), <span class="dv">28</span>:<s
         </div>
       </div>
 <a href="calibration.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="flow-system.html" class="navigation navigation-next " aria-label="Next page""><i class="fa fa-angle-right"></i></a>
-
+<a href="flow-system.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/lunr.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
@@ -296,7 +298,7 @@ pas[!<span class="kw">is.na</span>(pas$abs406_Mm), <span class="dv">28</span>:<s
 <script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
 <script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
 <script>
-require(["gitbook"], function(gitbook) {
+gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
 "sharing": {
 "github": false,
@@ -330,9 +332,11 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
-    if (location.protocol !== "file:" && /^https?:/.test(script.src))
-      script.src  = script.src.replace(/^https?:/, '');
+    var src = "";
+    if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
+    script.src = src;
     document.getElementsByTagName("head")[0].appendChild(script);
   })();
 </script>

@@ -2,8 +2,8 @@
 title: "MultiPAS User's Guide"
 author: "Al Fischer"
 output:
-  rmarkdown::latex_document: default
   bookdown::pdf_book: default
+  rmarkdown::latex_document: default
   bookdown::epub_book: default
   bookdown::gitbook:
     config:
