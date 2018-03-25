@@ -2,22 +2,22 @@
 title: "MultiPAS User's Guide"
 author: "Al Fischer"
 output:
-  bookdown::pdf_book: default
-  rmarkdown::latex_document: default
-  bookdown::epub_book: default
   bookdown::gitbook:
     config:
       download:
       - pdf
-      - epub
-      - mobi
       toc:
         before: |
           <li><a href="index.html">MultiPAS User's Guide</a></li>
         after: |
           Published in R with bookdown</a></li>
           <li><a href="https://bookdown.org">
+  rmarkdown::latex_document: default
+  bookdown::epub_book: default
+  bookdown::pdf_book: default
 site: bookdown::bookdown_site
+github-repo: alphonse/MultiPAS-Manual
+url: https\://alphonse.github.io/multipas-manual/
 documentclass: book
 ---
 
@@ -32,5 +32,5 @@ documentclass: book
 knitr::include_graphics("./images/multiPAS.png")
 ```
 
-&copy; 2016 Al Fischer/Smith Lab/University of Georgia
+&copy; 2018 Al Fischer/Smith Lab/University of Georgia
 </center>
