@@ -4,8 +4,7 @@ author: "Al Fischer"
 output:
   bookdown::gitbook:
     config:
-      download:
-      - pdf
+      download: ["manual.pdf"]
       toc:
         before: |
           <li><a href="index.html">MultiPAS User's Guide</a></li>

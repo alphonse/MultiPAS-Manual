@@ -187,9 +187,7 @@ Published in R with bookdown</a></li>
 <span class="kw">options</span>(<span class="dt">repos=</span><span class="st">&quot;http://archive.linux.duke.edu/cran/&quot;</span>) <span class="co"># not necessary if installing from </span>
 <span class="co"># RStudio&#39;s package manager</span>
 <span class="kw">install.packages</span>(<span class="st">&#39;devtools&#39;</span>)</code></pre></div>
-<pre><code>## 
-## The downloaded binary packages are in
-##  /var/folders/p_/3j0qd_7s7tzdm94x3cwyj7_m0000gn/T//Rtmp22qluQ/downloaded_packages</code></pre>
+<pre><code>## Error in install.packages : error reading from connection</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(devtools)
 
 <span class="co"># Now, use it to install aeRo and then load aeRo</span>
@@ -319,7 +317,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": ["_main.pdf"],
+"download": "manual.pdf",
 "toc": {
 "collapse": "subsection"
 }
